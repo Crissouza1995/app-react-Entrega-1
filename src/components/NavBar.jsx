@@ -12,19 +12,16 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { CartIcons } from "../icons/CartIcons";
-import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "../colors/MainColors";
 import CoffeIcon from "../icons/CoffeIcon";
 
 
 
-
-
-const pages = ["Products", "Promotion", "Blog"];
+const pages = ["Products", "Coffe Beams", "Coffe maker", "Cup Coffe"];
 const settings = ["Cart", "Products", "Login", "Logout"];
 
-function ResponsiveAppBar() {
+export const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -43,12 +40,13 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
   return (
+    
     <ThemeProvider theme={theme}>
       <AppBar position="static">
         
         <Container maxWidth="xl">
        
-          <Toolbar disableGutters>
+          <Toolbar disableGutters>                                                                                          
           <CoffeIcon></CoffeIcon>
             <Typography
               variant="h6"
@@ -167,7 +165,7 @@ function ResponsiveAppBar() {
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
               <CartIcons />
             </IconButton>
-            <h2>+1</h2>
+            <h2>0</h2>
           </Toolbar>
           
         </Container>
@@ -175,7 +173,8 @@ function ResponsiveAppBar() {
     </ThemeProvider>
   );
 }
-export default ResponsiveAppBar;
+
+export default NavBar;
 
 /*
  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
