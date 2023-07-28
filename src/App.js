@@ -1,6 +1,6 @@
 
 import './App.css';
-import { Browser, BrowserRouter, Routes, route } from 'react-router-dom';
+import { Browser, BrowserRouter, Routes, Route } from 'react-router-dom';
 import {
   ItemListContainer,
   NavBar,
@@ -19,10 +19,10 @@ function App() {
       <NavBar />
       <BrowserRouter>
         <Routes>
-          <route path='/' element={<ItemListContainer />} />
-          <route path='/category/:categoryId' element={<ItemListContainer />} />
-          <route path='/item/:itemId' element={<ItemDetailContainer />} />
-          <route path='*' element={<h1>404 NOT FOUND</h1>} />
+          <Route path='/' element={<ItemListContainer />} />
+          <Route path='/category/:categoryId' element={<ItemListContainer />} />
+          <Route path='/item/:itemId' element={<ItemDetailContainer />} />
+          <Route path='*' element={<h1>404 NOT FOUND</h1>} />
         </Routes>
       </BrowserRouter>
       <ItemListContainer />
