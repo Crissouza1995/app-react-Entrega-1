@@ -8,6 +8,7 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const Item = ({id, name, price, img}) => {
+  console.log('item id:', id)
 
 
   return (
@@ -30,7 +31,7 @@ const Item = ({id, name, price, img}) => {
           Agregar al carrito
         </Button>
         <Button variant='outlined' size='small' color='primary'>
-          Ver detalle
+        <Link to={`/category/${id}`} >Ver Detalle</Link>
         </Button>
         <Typography variant='subtitle1' color='text.primary' align='right'>
          Price: {`$${price}`}

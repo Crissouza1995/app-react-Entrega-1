@@ -1,36 +1,32 @@
 import { useState, useEffect } from "react";
 import { getProductsById } from "../asyncMock";
-import ItemDetail from "./ItemDetail";
 import { useParams } from "react-router-dom";
 import { getProducts } from '../asyncMock'
+import Item from "./Item";
+import { Grid } from "@mui/material";
+import ItemDetail from '../components/ItemDetail'
 
 const ItemDetailContainer = () => {
-  const [product, setProduct] = useState([]);
-  console.log("re")
-  const { itemId } = useParams();
-  const getAllProducts = async () => {
-
-    const productsAux = await getProducts();
-    console.log("products",productsAux)
-  };
+  const [product, setProduct] = useState(null);
+  const { categoryId } = useParams();
 
   useEffect(() => {
-    void getAllProducts() 
+    
+    const fetchData = async () => {
+      const aux = await getProducts();
+      const filtrado = aux.filter((element) => element.id === categoryId).at(0);      
+      setProduct(filtrado)
+    };
+
+    fetchData();
+    
   }, []);
-
-  useEffect(() => {
-    /* getProductsById(itemId)
-      .then((response) => {
-        setProduct(response);
-      })
-      .catch((error) => {
-        console.error(error);
-      });*/
-  }, [itemId]);
 
   return (
     <div>
-      <ItemDetail {...product} />
+      <Grid container spacing={6} py={6}>
+        <ItemDetail {...product} />
+        </Grid>
     </div>
   );
 };
