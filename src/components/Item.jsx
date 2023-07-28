@@ -30,7 +30,6 @@ const Item = ({id, name, price, img}) => {
           Agregar al carrito
         </Button>
         <Button variant='outlined' size='small' color='primary'>
-          <Link to={`/item/${id}`}></Link>
           Ver detalle
         </Button>
         <Typography variant='subtitle1' color='text.primary' align='right'>

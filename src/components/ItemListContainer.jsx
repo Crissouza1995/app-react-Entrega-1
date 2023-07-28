@@ -8,16 +8,8 @@ export const ItemListContainer = ({ greeting }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-     
-      setProducts([ {
-        id: "1",
-        name: "Nicaragua Single Origin",
-        price: 2000,
-        category: "coffe beans",
-        img: "https://djftrby1k8irl.cloudfront.net/s3fs-public/2022-03%2FNicaragua-Single-425x425.png?auto=format,compress&q=70&crop=focalpoint&ar=1:1.0&w=180&fit=crop",
-        stock: 250,
-        description:"Mildly roasted coffee with sweet notes of melon, the freshness of lemon and nuts.",
-      }]);
+     const aux = await getProducts();
+     setProducts(aux);
     };
 
     fetchData();
