@@ -3,17 +3,23 @@ import { getProducts, getProductsByCategory } from "../asyncMock";
 import ItemList from "./ItemList";
 import { useParams } from "react-router-dom";
 
-export const ItemListContainer = ({ greeting }) => {
+export const ItemListContainer = () => {
   const [products, setProducts] = useState([]);
+  const { productsCategory } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
-     const aux = await getProducts();
-     setProducts(aux);
+      
+      const allProducts = await getProducts();
+
+      const filteredProducts = productsCategory
+        ? allProducts.filter(product => product.category === productsCategory)
+        : allProducts;
+      setProducts(filteredProducts);
     };
 
     fetchData();
-  }, []);
+  }, [productsCategory]);
 
   return (
     <div>
@@ -26,3 +32,5 @@ export const ItemListContainer = ({ greeting }) => {
 };
 
 export default ItemListContainer;
+
+

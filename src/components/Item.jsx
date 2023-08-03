@@ -10,7 +10,6 @@ import { Link } from 'react-router-dom';
 const Item = ({id, name, price, img}) => {
   console.log('item id:', id)
 
-
   return (
     <Card className='animate__animated animate__fadeIn' raised>
       <CardActionArea>

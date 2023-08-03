@@ -14,14 +14,16 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { CartIcons } from "../icons/CartIcons";
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "../colors/MainColors";
+import { NavLink, Link } from 'react-router-dom';
 import CoffeIcon from "../icons/CoffeIcon";
+import { getProducts } from "../asyncMock";
 
 
 
 const pages = ["Products", "Coffe Beams", "Coffe maker", "Cup Coffe"];
 const settings = ["Cart", "Products", "Login", "Logout"];
 
-export const NavBar = () => {
+export const NavBar = ({ category }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -66,7 +68,7 @@ export const NavBar = () => {
               Tomate un feca
             </Typography>
 
-        
+    
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -98,6 +100,7 @@ export const NavBar = () => {
               >
                 {pages.map((page) => (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
                 ))}
@@ -121,15 +124,40 @@ export const NavBar = () => {
               }}
             ></Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {pages.map((page) => (
+    
                 <Button
-                  key={page}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white", display: "block" }}
+                  href="/"
                 >
-                  {page}
+                  Products
                 </Button>
-              ))}
+                
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                  href="/productsCategory/coffe maker"
+                  
+                >
+                  coffe-maker
+                </Button>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                  href="/productsCategory/coffe beans"
+                 
+                >
+                  coffe-beans
+                </Button>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                  href="/productsCategory/coffe cup"
+                >
+                  coffe-cup
+                </Button>
+
+              
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
