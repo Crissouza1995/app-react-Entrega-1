@@ -14,16 +14,12 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { CartIcons } from "../icons/CartIcons";
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "../colors/MainColors";
-import { NavLink, Link } from 'react-router-dom';
+
 import CoffeIcon from "../icons/CoffeIcon";
-import { getProducts } from "../asyncMock";
 
-
-
-const pages = ["Products", "Coffe Beams", "Coffe maker", "Cup Coffe"];
 const settings = ["Cart", "Products", "Login", "Logout"];
 
-export const NavBar = ({ category }) => {
+export const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -98,12 +94,37 @@ export const NavBar = ({ category }) => {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "black", display: "block" }}
+                  href="/"
+                >
+                  Products
+                </Button>
+                
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "black", display: "block" }}
+                  href="/productsCategory/coffe maker"
                   
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
-                ))}
+                >
+                  coffe-maker
+                </Button>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "black", display: "block" }}
+                  href="/productsCategory/coffe beans"
+                 
+                >
+                  coffe-beans
+                </Button>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "black", display: "block" }}
+                  href="/productsCategory/coffe cup"
+                >
+                  coffe-cup
+                </Button>
               </Menu>
             </Box>
             <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />

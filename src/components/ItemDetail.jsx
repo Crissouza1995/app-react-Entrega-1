@@ -7,10 +7,6 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 import { Grid } from "@mui/material";
 
 
-import Box from '@mui/material/Box';
-import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
-import Divider from '@mui/material/Divider';
-
    const ItemDetail = ({id, name, price, img, description,stock}) => {
     console.log('item id:', id)
   

@@ -1,0 +1,6 @@
+.coffee-loading {
+    width: 40vh; 
+    height: 40vh;
+    border-radius: 100%; 
+    border: 3px solid black; 
+  }

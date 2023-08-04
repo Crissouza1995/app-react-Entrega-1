@@ -1,6 +1,6 @@
 
 import './App.css';
-import { Browser, BrowserRouter, Routes, Route } from 'react-router-dom';
+import {  BrowserRouter, Routes, Route } from 'react-router-dom';
 import {
   ItemListContainer,
   NavBar,
@@ -9,6 +9,7 @@ import * as React from 'react';
 import ItemDetailContainer from './components/itemDetailContainer';
 
 function App() {
+
   return (
     <div>
       <NavBar />
