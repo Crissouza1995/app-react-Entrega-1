@@ -5,7 +5,7 @@ const products = [
     price: 2000,
     category: "coffebeans",
     img: "https://djftrby1k8irl.cloudfront.net/s3fs-public/2022-03%2FNicaragua-Single-425x425.png?auto=format,compress&q=70&crop=focalpoint&ar=1:1.0&w=180&fit=crop",
-    stock: 250,
+    stock: 7,
     description:
       "Mildly roasted coffee with sweet notes of melon, the freshness of lemon and nuts.",
   },

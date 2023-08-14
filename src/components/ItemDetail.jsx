@@ -3,13 +3,24 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import ItemCount from './ItemCount';
+import { CardActionArea, CardActions } from '@mui/material';
 import { Grid } from "@mui/material";
-
+import { useCartContext } from '../context/CartContext'; 
+import { useState } from 'react';
 
    const ItemDetail = ({id, name, price, img, description,stock}) => {
-    console.log('item id:', id)
+
+    const [goToCart, setGotoCart] = useState (false)
+    const {addProduct} = useCartContext();
+
+    const onAdd = (quantity) =>{
+      console.log("compraste", quantity);
+      setGotoCart(true)
+      addProduct (id ,quantity);
+    }
   
+    
   return (
 
     <Grid container justifyContent="center" alignItems="center" style={{ minHeight: '100vh' }}>
@@ -29,9 +40,7 @@ import { Grid } from "@mui/material";
         </CardContent>
       </CardActionArea>
       <CardActions sx={{ display: 'flex', justifyContent: 'space-around' }}>
-        <Button variant='outlined' size='small' color='primary'>
-          Agregar al carrito
-        </Button>
+        <ItemCount initial={1} stock = {stock} onAdd={onAdd}></ItemCount>
         <Typography variant='subtitle1' color='text.primary' align='right'>
           Price: {`$${price}`}
         </Typography>

@@ -16,6 +16,7 @@ import { ThemeProvider } from "@emotion/react";
 import { theme } from "../colors/MainColors";
 
 import CoffeIcon from "../icons/CoffeIcon";
+import { NavLink, Link } from "react-router-dom";
 
 const settings = ["Cart", "Products", "Login", "Logout"];
 
@@ -102,14 +103,8 @@ export const NavBar = () => {
                   Products
                 </Button>
                 
-                <Button
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "black", display: "block" }}
-                  href="/productsCategory/coffe maker"
-                  
-                >
-                  coffe-maker
-                </Button>
+  
+                <Link to="/productsCategory/coffe maker">coffe-maker</Link>
                 <Button
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "black", display: "block" }}
@@ -211,7 +206,7 @@ export const NavBar = () => {
                 ))}
               </Menu>
             </Box>
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+            <IconButton href="/Cart" onClick={handleOpenUserMenu} sx={{ p: 0 }}>
               <CartIcons />
             </IconButton>
             <h2>0</h2>

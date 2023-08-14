@@ -34,9 +34,9 @@ export const ItemListContainer = () => {
     <div>
       <div>
         <h1 className="title-style">Welcome to feca's store</h1>
-      </div>
+      </div  >
       <ItemList products={products} />
-    </div>
+      </div>
   );
 };
 
