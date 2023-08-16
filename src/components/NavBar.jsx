@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -14,13 +14,39 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { CartIcons } from "../icons/CartIcons";
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "../colors/MainColors";
+import "../components/NavBar.css";
+import { useCartContext } from '../context/CartContext'; 
+
 
 import CoffeIcon from "../icons/CoffeIcon";
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const settings = ["Cart", "Products", "Login", "Logout"];
 
+
 export const NavBar = () => {
+
+  const { cart } = useCartContext();
+
+  const cartAddDisplay= cart.length;
+
+
+  const [isJumping, setIsJumping] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsJumping(true);
+      setTimeout(() => {
+        setIsJumping(false);
+      }, 1000); 
+    }, 3000); 
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+  
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -39,19 +65,17 @@ export const NavBar = () => {
     setAnchorElUser(null);
   };
   return (
-    
     <ThemeProvider theme={theme}>
       <AppBar position="static">
-        
         <Container maxWidth="xl">
-       
-          <Toolbar disableGutters>                                                                                          
-          <CoffeIcon></CoffeIcon>
+          <Toolbar disableGutters>
+            <CoffeIcon></CoffeIcon>
+            
+        
             <Typography
               variant="h6"
               noWrap
               component="a"
-              href="/"
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
@@ -63,9 +87,9 @@ export const NavBar = () => {
               }}
             >
               Tomate un feca
+              
             </Typography>
 
-    
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -98,18 +122,23 @@ export const NavBar = () => {
                 <Button
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "black", display: "block" }}
-                  href="/"
+                  
                 >
+                  <Link to="/"></Link>
                   Products
                 </Button>
-                
-  
-                <Link to="/productsCategory/coffe maker">coffe-maker</Link>
+
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "black", display: "block" }}
+                >
+                  <Link to="/productsCategory/coffe maker">coffe-maker</Link>
+                </Button>
+
                 <Button
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "black", display: "block" }}
                   href="/productsCategory/coffe beans"
-                 
                 >
                   coffe-beans
                 </Button>
@@ -140,40 +169,44 @@ export const NavBar = () => {
               }}
             ></Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-    
-                <Button
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                  href="/"
-                >
-                  Products
-                </Button>
-                
-                <Button
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                  href="/productsCategory/coffe maker"
-                  
-                >
-                  coffe-maker
-                </Button>
-                <Button
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                  href="/productsCategory/coffe beans"
-                 
-                >
-                  coffe-beans
-                </Button>
-                <Button
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                  href="/productsCategory/coffe cup"
-                >
-                  coffe-cup
-                </Button>
+            <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "black", display: "block" }}
+              >
+                <Link to="/" className="Nav-title">
+                 PRODUCTS
+                </Link>
+              </Button>
 
-              
+
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "black", display: "block" }}
+              >
+                <Link to="/productsCategory/coffe maker" className="Nav-title">
+                  coffe-maker
+                </Link>
+              </Button>
+
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "black", display: "block" }}
+              >
+                <Link to="/productsCategory/coffe beans" className="Nav-title">
+                  coffe-BEANS
+                </Link>
+              </Button>
+
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "black", display: "block" }}
+              >
+                <Link to="/productsCategory/coffe cup" className="Nav-title">
+                  coffe-CUP
+                </Link>
+              </Button>
+
+      
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
@@ -207,16 +240,18 @@ export const NavBar = () => {
               </Menu>
             </Box>
             <IconButton href="/Cart" onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <CartIcons />
+            <Link to="/cart" className="Nav-title">
+            <CartIcons />
+                </Link>
             </IconButton>
-            <h2>0</h2>
+            <div className={`cart-badge ${isJumping ? 'jump' : ''}`}>{cartAddDisplay}</div>
+
           </Toolbar>
-          
         </Container>
       </AppBar>
     </ThemeProvider>
   );
-}
+};
 
 export default NavBar;
 

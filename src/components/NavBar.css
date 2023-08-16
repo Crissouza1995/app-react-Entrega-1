@@ -1,0 +1,30 @@
+.Nav-title{
+
+    text-decoration: none;
+    font-size: 1.4vh;
+    font-family: "Roboto","Helvetica","Arial";
+    color: white;
+
+}
+
+
+.cart-badge {
+    position: absolute;
+    top: 7px;
+    right: -8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .cart-badge.jump {
+    transform: translateY(-6px); 
+  }
