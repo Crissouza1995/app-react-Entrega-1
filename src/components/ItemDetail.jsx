@@ -12,11 +12,9 @@ import { useState } from "react";
 const ItemDetail = ({ id, name, price, img, description, stock }) => {
   const [goToCart, setGotoCart] = useState(false);
 
-  const { addProduct, cart } = useCartContext();
+  const { addProduct } = useCartContext();
 
   const onAdd = (quantity) => {
-    console.log("compraste", quantity);
-    console.log("te salio: $", price)
     setGotoCart(true);
     addProduct(id, quantity,price,name,img);
   };

@@ -70,8 +70,7 @@ export const NavBar = () => {
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <CoffeIcon></CoffeIcon>
-            
-        
+          
             <Typography
               variant="h6"
               noWrap

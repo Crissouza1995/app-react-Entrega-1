@@ -3,7 +3,7 @@ const products = [
     id: "1",
     name: "Nicaragua Single Origin",
     price: 2000,
-    category: "coffebeans",
+    category: "coffe beans",
     img: "https://djftrby1k8irl.cloudfront.net/s3fs-public/2022-03%2FNicaragua-Single-425x425.png?auto=format,compress&q=70&crop=focalpoint&ar=1:1.0&w=180&fit=crop",
     stock: 7,
     description:
