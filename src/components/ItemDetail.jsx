@@ -10,6 +10,9 @@ import { useCartContext } from "../context/CartContext";
 import { useState } from "react";
 
 const ItemDetail = ({ id, name, price, img, description, stock }) => {
+
+
+
   const [goToCart, setGotoCart] = useState(false);
 
   const { addProduct } = useCartContext();
@@ -20,7 +23,6 @@ const ItemDetail = ({ id, name, price, img, description, stock }) => {
   };
 
  
-
   return (
     <Grid
       container
