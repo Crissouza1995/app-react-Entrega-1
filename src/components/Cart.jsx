@@ -46,17 +46,25 @@ const Cart = (cartAddDisplay) => {
             Total: {'$' + totalCartPrice().toFixed(2)}
           </Typography>
 
+
+          <Link to="/CheckOut" className="Nav-title">
+
           <Box display='flex' gap justifyContent={'center'} my>
             <Button
               variant='contained'
               color='error'
               component={Link}
-              to='/checkout'
+              to='/checkOut'
               startIcon={<PointOfSaleIcon />}
             >
               Proceder al pago
             </Button>
           </Box>
+                 
+
+                </Link>
+
+       
 
         </>
       ) : (
