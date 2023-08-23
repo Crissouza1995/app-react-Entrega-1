@@ -2,10 +2,10 @@ import React from "react";
 import { useState, useContext } from "react";
 import { Navigate } from "react-router-dom";
 import { useCartContext } from "../context/CartContext";
+import { Link } from "react-router-dom";
+import { useFormContext } from "../context/FormContext";
 import DispatchCheckout from "./DispatchCheckout";
 import getStepContent from "./helpers/getStepContent";
-
-import validateAddressForm from "./helpers/ValidateAddresForm";
 
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -15,10 +15,13 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { addDoc, getFirestore, collection } from 'firebase/firestore';
 
-const steps = ["Dirección de envío", "Chequeo de datos"];
+const steps = ["Dirección de envío", "Chequeo de datos", "Orden generada"];
 
 const CheckOut = () => {
+  const { formData, setFormData } = useFormContext();
+
   const [activeStep, setActiveStep] = useState(0);
 
   const { cart, resetCart, totalCartPrice, amountOfItemsInCart } =
@@ -34,13 +37,37 @@ const CheckOut = () => {
         setActiveStep(activeStep + 1);
       }
     } else {
-      setActiveStep(activeStep + 1);
+      setActiveStep(activeStep + 2);
     }
   };
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+
+  const order = {
+    buyer: {
+      name: "Cristian",
+      email: "cristianfabiansouza@gmail.com",
+      phone: "1132748401",
+      adress: "Pedro Palacios 605",
+    },
+    items: cart.map((product) => ({
+      id: product.id,
+      title: product.title,
+      quantity: product.quantity,
+    })),
+    total: totalCartPrice(),
+  };
+
+  const handleClick = () => {
+    const db = getFirestore();
+    const ordersCollection = collection(db,'orders');
+    addDoc(ordersCollection,order)
+    .then(({ id }) => console.log(id))
+  };
+
+  console.log("Datos de user en checkOUT", { ...formData });
 
   return (
     <div>
@@ -61,7 +88,7 @@ const CheckOut = () => {
             activeStep={activeStep}
             sx={{ pt: 3, pb: 5, display: { xs: "none", sm: "flex" } }}
           >
-            {steps.map((label) => (
+            {steps.map((label, index) => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
               </Step>
@@ -74,6 +101,12 @@ const CheckOut = () => {
                 resetCart={resetCart}
                 totalCartPrice={totalCartPrice}
               />
+            ) : activeStep === steps.length - 1 ? (
+              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                <Button onClick={() => {}} sx={{ mt: 3, ml: 1 }} href="/">
+                  Seguir Comprando
+                </Button>
+              </Box>
             ) : (
               <>
                 {getStepContent(activeStep)}
@@ -89,7 +122,7 @@ const CheckOut = () => {
                     onClick={handleNext}
                     sx={{ mt: 3, ml: 1 }}
                   >
-                    {activeStep === steps.length - 1
+                    {activeStep === steps.length - 1 
                       ? "Revisar y Finalizar"
                       : "Siguiente"}
                   </Button>

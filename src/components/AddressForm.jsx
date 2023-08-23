@@ -21,6 +21,8 @@ const AddressForm = () => {
     
   };
 
+  console.log('datos de User',formData);
+
   return (
     <form onSubmit={handleSubmit}>
       <Grid container spacing={2}>
