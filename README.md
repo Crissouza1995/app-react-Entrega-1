@@ -1,4 +1,4 @@
-# PROYECTO ECCOMERCE CODERHOUSE- "Tomate un fecha"
+# PROYECTO ECCOMERCE CODERHOUSE- "Tomate un feca"
 
 # Sobre el proyecto
 
