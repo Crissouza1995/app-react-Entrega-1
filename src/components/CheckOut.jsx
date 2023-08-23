@@ -2,7 +2,6 @@ import React from "react";
 import { useState, useContext } from "react";
 import { Navigate } from "react-router-dom";
 import { useCartContext } from "../context/CartContext";
-import { Link } from "react-router-dom";
 import { useFormContext } from "../context/FormContext";
 import DispatchCheckout from "./DispatchCheckout";
 import getStepContent from "./helpers/getStepContent";
@@ -15,11 +14,14 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { addDoc, getFirestore, collection } from 'firebase/firestore';
+import { addDoc, getFirestore, collection, Timestamp } from "firebase/firestore";
 
 const steps = ["Dirección de envío", "Chequeo de datos", "Orden generada"];
 
 const CheckOut = () => {
+
+  const [orderId, setOrderId] = useState(null);
+
   const { formData, setFormData } = useFormContext();
 
   const [activeStep, setActiveStep] = useState(0);
@@ -31,12 +33,13 @@ const CheckOut = () => {
     return <Navigate to="/" />;
   }
   const handleNext = () => {
+    
     if (activeStep === 0) {
       const formIsValid = true;
       if (formIsValid) {
         setActiveStep(activeStep + 1);
       }
-    } else {
+    } else if (activeStep === 1) {
       setActiveStep(activeStep + 2);
     }
   };
@@ -47,26 +50,38 @@ const CheckOut = () => {
 
   const order = {
     buyer: {
-      name: "Cristian",
-      email: "cristianfabiansouza@gmail.com",
-      phone: "1132748401",
-      adress: "Pedro Palacios 605",
+      name: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      phone: formData.phoneNumber,
+      adress:formData.address,
+      date: Timestamp.fromDate(new Date()),
     },
     items: cart.map((product) => ({
       id: product.id,
-      title: product.title,
-      quantity: product.quantity,
+      itemsOnCart: cart.length,
+      name:product.name,
+      quantityItems: product.quantity,
     })),
+    itemsOnCart: cart.length,
     total: totalCartPrice(),
   };
 
-  const handleClick = () => {
-    const db = getFirestore();
-    const ordersCollection = collection(db,'orders');
-    addDoc(ordersCollection,order)
-    .then(({ id }) => console.log(id))
+  console.log('carrtito en checkout',cart);
+
+
+  const handleClick = () =>{
+    if (orderId === null) { 
+      const db = getFirestore();
+      const ordersCollection = collection(db, 'orders');
+      addDoc(ordersCollection, order).then(({ id }) => {
+        console.log(id);
+        setOrderId(id); 
+      });
+    }
   };
 
+  console.log('orderIdUsuario',orderId)
   console.log("Datos de user en checkOUT", { ...formData });
 
   return (
@@ -96,17 +111,20 @@ const CheckOut = () => {
           </Stepper>
           <>
             {activeStep === steps.length ? (
-              <DispatchCheckout
-                cart={cart}
-                resetCart={resetCart}
-                totalCartPrice={totalCartPrice}
-              />
-            ) : activeStep === steps.length - 1 ? (
-              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                <Button onClick={() => {}} sx={{ mt: 3, ml: 1 }} href="/">
-                  Seguir Comprando
-                </Button>
-              </Box>
+              <> {handleClick()}
+                <DispatchCheckout
+                  cart={cart}
+                  resetCart={resetCart}
+                  totalCartPrice={totalCartPrice}
+                  handleClick={handleClick}
+                   orderId = { orderId }
+                />
+                <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                  <Button onClick={() => {}} sx={{ mt: 3, ml: 1 }} href="/" variant="contained">
+                    Seguir Comprando
+                  </Button>
+                </Box>
+              </>
             ) : (
               <>
                 {getStepContent(activeStep)}
@@ -116,13 +134,12 @@ const CheckOut = () => {
                       Volver
                     </Button>
                   )}
-
                   <Button
                     variant="contained"
                     onClick={handleNext}
                     sx={{ mt: 3, ml: 1 }}
                   >
-                    {activeStep === steps.length - 1 
+                    {activeStep === steps.length - 1
                       ? "Revisar y Finalizar"
                       : "Siguiente"}
                   </Button>
