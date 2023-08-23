@@ -1,3 +1,17 @@
+# PROYECTO ECCOMERCE CODERHOUSE- "Tomate un fecha"
+
+# Sobre el proyecto
+
+creador: Cristian Souza
+Email: cristianfabiansouza@gmail.com
+Modulo: React
+Comision: 43315
+
+Esta ecomerce esta planteada como un portal de compra de productos relacionados al cafe, se usa la base de datos de Firebase con generador de ordenes de compra por ID.
+el proyecto fue finalizado el 23/08/2023. 
+Como dato adicional se uso Material UI como framework de este proyecto.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
