@@ -12,7 +12,6 @@ const DispatchCheckout = ({orderId}) => {
 
   const variable = "se renderizo dispatch-checkout";
 
-  console.log(variable);
 
   return (
     <div>
