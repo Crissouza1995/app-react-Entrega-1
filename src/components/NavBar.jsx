@@ -30,8 +30,30 @@ export const NavBar = () => {
 
   const cartAddDisplay= cart.length;
 
+  const [isTop, setIsTop] = useState(true);
 
   const [isJumping, setIsJumping] = useState(false);
+
+  
+
+
+  const handleScroll = () => {
+    if (window.scrollY > 0) {
+      setIsTop(false);
+    } else {
+      setIsTop(true);
+    }
+  };
+
+
+  useEffect(() => {
+   
+    window.addEventListener("scroll", handleScroll);
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -45,7 +67,6 @@ export const NavBar = () => {
       clearInterval(interval);
     };
   }, []);
-  
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -66,11 +87,13 @@ export const NavBar = () => {
   };
   return (
     <ThemeProvider theme={theme}>
-      <AppBar position="static">
+      <AppBar
+        position={isTop ? "static" : "fixed"}
+        sx={{ my: 0.5, backgroundColor: isTop ? "#b26e59" : "rgba(178, 110, 89, 0.8)"  }}
+      >
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <CoffeIcon></CoffeIcon>
-          
             <Typography
               variant="h6"
               noWrap
@@ -81,7 +104,7 @@ export const NavBar = () => {
                 fontFamily: "monospace",
                 fontWeight: 700,
                 letterSpacing: ".3rem",
-                color: "inherit",
+                color: "black",
                 textDecoration: "none",
               }}
             >
@@ -96,7 +119,7 @@ export const NavBar = () => {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleOpenNavMenu}
-                color="inherit"
+                color="black"
               >
                 <MenuIcon />
               </IconButton>
@@ -131,7 +154,7 @@ export const NavBar = () => {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "black", display: "block" }}
                 >
-                  <Link to="/productsCategory/coffe maker">coffe-maker</Link>
+                  <Link  to="/productsCategory/coffe maker">coffe-maker</Link>
                 </Button>
 
                 <Button
@@ -170,9 +193,9 @@ export const NavBar = () => {
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "black", display: "block" }}
+                sx={{ my: 3, color: "black", display: "block" }}
               >
-                <Link to="/" className="Nav-title">
+                <Link  to="/" className="Nav-title" >
                  PRODUCTS
                 </Link>
               </Button>
