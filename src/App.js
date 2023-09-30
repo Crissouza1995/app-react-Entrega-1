@@ -1,6 +1,6 @@
 
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import {
   ItemListContainer,
   NavBar,
@@ -21,7 +21,7 @@ function App() {
 
     <FormProvider>
       <CartProvider>
-        <BrowserRouter>
+        <Router>
           <NavBar />
           <Routes>
             <Route path='/' element={<ItemListContainer />} />
@@ -32,7 +32,7 @@ function App() {
             <Route path='/CheckOut' element={<CheckOut />} />
             <Route path='*' element={<h1>404 NOT FOUND</h1>} />
           </Routes>
-        </BrowserRouter>
+        </Router>
       </CartProvider>
     </FormProvider>
 
