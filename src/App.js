@@ -13,11 +13,9 @@ import { FormProvider } from './context/FormContext';
 import CheckOut from './components/CheckOut'
 
 
-
 function App() {
 
   console.log("App")
-
 
   return (
 
@@ -26,7 +24,7 @@ function App() {
         <BrowserRouter>
           <NavBar />
           <Routes>
-            <Route path='/' element={<ItemListContainer />} />
+            <Route path='/productsCategory' element={<ItemListContainer />} />
             <Route path='/category/:categoryId' element={<ItemDetailContainer />} />
             <Route path='/productsCategory/:productsCategory' element={<ItemListContainer />} />
             <Route path='/item/:itemId' element={<ItemDetailContainer />} />
